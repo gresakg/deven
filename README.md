@@ -24,6 +24,16 @@ Make a soft link somwhere in your PATH
 ln -s /path/to/deven.php /usr/local/bin/deven
 ``
 
+## Usage
+
+You must use DevEn as root (or sudo).
+
+deven [options] domain.name
+
+``
+deven myproject.local
+``
+
 ## TODO
 
 - delete
