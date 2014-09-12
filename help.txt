@@ -1,0 +1,17 @@
+DevEn - Command line tool for creating LAMP developpement environements with a single command.
+DevEn will create the necessary folders, create an apache virtual host and add
+a new entry in the /etc/hosts file so that your domain (local or FQDN) will 
+immediately be visible locally in your browser.
+You must have root privileges to run DevEn, so you should either be logged in 
+as root or use sudo.
+
+Usage:
+ deven [options] domain.name
+
+Options:
+ -u --user sets the user. By default, current user will be used.
+ -p --path project will be created using this path rather than the default one.
+ -l --list list existing domains 
+
+ -h --help outputs this help
+ --prompt gathers information using prompt rather than command line arguments
