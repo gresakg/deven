@@ -13,10 +13,13 @@ quickly.
 
 Clone the repo or download and unzip to a directory of your choice. Make deven.php
 executable
+
 ``
 chmod +x deven.php
 ``
+
 Make a soft link somwhere in your PATH
+
 ``
 ln -s /path/to/deven.php /usr/local/bin/deven
 ``
