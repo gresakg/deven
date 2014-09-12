@@ -34,6 +34,15 @@ deven [options] domain.name
 deven myproject.local
 ``
 
+### Options
+
+ -u --user sets the user. By default, current user will be used.
+ -p --path project will be created using this path rather than the default one.
+ -l --list list existing domains 
+
+ -h --help outputs this help
+ --prompt gathers information using prompt rather than command line arguments
+
 ## TODO
 
 - delete
