@@ -36,6 +36,7 @@ $short .= "p:";
 $short .= "l";
 $short .= "h";
 $long = array(
+	"list",
 	"prompt",
 	"help",
 );
@@ -63,7 +64,6 @@ if(isset($options['l'])||isset($options['list'])) {
 	echo nl;
 	die;
 }
-
 
 //gather information
 
