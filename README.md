@@ -36,7 +36,7 @@ deven myproject.local
 
 ### Options
 
- -u --user sets the user. By default, current user will be used.
+ -u sets the user. By default, current user will be used.
 
  -p --path project will be created using this path rather than the default one.
 
@@ -45,7 +45,7 @@ deven myproject.local
 
 
  -h --help outputs this help
-
+ -v --version outputs deven version number
  --prompt gathers information using prompt rather than command line arguments
 
 
