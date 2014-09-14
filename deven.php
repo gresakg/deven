@@ -93,6 +93,15 @@ if(in_array($apache_config_dir.$domain.".conf",$sites_available)) {
 	die("Domain allready exists in ".$apache_config_dir.nl);
 }
 
+//does the domain name looks like one, or it could be a mistake?
+if(strpos($domain,".") === false) {
+	$domainconfirm = prompt("You are creating a domain without TLD: ".$domain.".".nl." Please confirm "
+		. "that this is what you meant by reentering the domain name or just say No ".nl,true,"no");
+	if(strtolower(trim($domainconfirm))== "no") die ("Operation aborted!".nl);
+	if(trim($domainconfirm) !== $domain) die("The confirmation domain and the domain first entered missmached. ".nl
+		. "Please start over. Aborting operation!".nl);
+}
+
 
 if(empty($path)) {
 	$path = "/home/".$user."/".$projects_dir."/".$domain;
