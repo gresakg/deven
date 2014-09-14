@@ -20,7 +20,7 @@
  */
 
 define("nl","\n");
-define("version", "0.1");
+define("version", "0.2");
 
 require 'config.php';
 
@@ -35,10 +35,12 @@ $short .= "u:";
 $short .= "p:";
 $short .= "l";
 $short .= "h";
+$short .= "v";
 $long = array(
 	"list",
 	"prompt",
 	"help",
+	"version",
 );
 $options = getopt($short, $long);
 
@@ -52,6 +54,9 @@ echo "## DevEn version ".version." ##
 Copyright (C) 2014, Gregor Grešak, gresak.net
 DevEn comes with ABSOLUTELY NO WARRANTY; This is free software, 
 and you are welcome to redistribute it under GPL v.2 license.".nl.nl;
+
+if(isset($options["v"]) || isset($options["version"])) die ("DevEn version ".version.nl.nl);
+if(count($argv) < 2) die("Usage: deven [options] domain.name".nl.nl."Please type deven -h for options details.".nl.nl);
 
 // we need root privileges
 if(posix_geteuid() !== 0) {
@@ -93,7 +98,7 @@ if(in_array($apache_config_dir.$domain.".conf",$sites_available)) {
 	die("Domain allready exists in ".$apache_config_dir.nl);
 }
 
-//does the domain name looks like one, or it could be a mistake?
+//does the domain name looks like one, or it could be a mistake? TODO regex check for valid characters
 if(strpos($domain,".") === false) {
 	$domainconfirm = prompt("You are creating a domain without TLD: ".$domain.".".nl." Please confirm "
 		. "that this is what you meant by reentering the domain name or just say No ".nl,true,"no");
