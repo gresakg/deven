@@ -51,6 +51,7 @@ deven myproject.local
 
 ## TODO
 
+- skip folders creation (for existing sources)
 - delete
 - option to create mysql database
 - option to create mongodb collection
