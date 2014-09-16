@@ -20,7 +20,7 @@
  */
 
 define("nl","\n");
-define("version", "0.2");
+define("version", "0.4");
 
 require 'config.php';
 
@@ -41,6 +41,8 @@ $long = array(
 	"prompt",
 	"help",
 	"version",
+	"host-only",
+	"ip:",
 );
 $options = getopt($short, $long);
 
@@ -55,7 +57,10 @@ Copyright (C) 2014, Gregor Grešak, gresak.net
 DevEn comes with ABSOLUTELY NO WARRANTY; This is free software, 
 and you are welcome to redistribute it under GPL v.2 license.".nl.nl;
 
+// argument -v
 if(isset($options["v"]) || isset($options["version"])) die ("DevEn version ".version.nl.nl);
+
+// no arguments
 if(count($argv) < 2) die("Usage: deven [options] domain.name".nl.nl."Please type deven -h for options details.".nl.nl);
 
 // we need root privileges
@@ -96,6 +101,13 @@ else {
 $sites_available = glob($apache_config_dir."*.conf");
 if(in_array($apache_config_dir.$domain.".conf",$sites_available)) {
 	die("Domain allready exists in ".$apache_config_dir.nl);
+}
+
+// host only option
+if(isset($options['host-only'])) {
+	if(empty($options['ip'])) $options['ip'] = "127.0.0.1"; 
+	add_host($domain, $options["ip"]);
+	die;
 }
 
 //does the domain name looks like one, or it could be a mistake? TODO regex check for valid characters
@@ -148,10 +160,7 @@ fwrite($file, $content);
 fclose($file);
 
 //add entry to /etc/hosts
-$file = fopen("/etc/hosts", "a");
-fwrite($file, nl."# Line added by DevEn".nl);
-fwrite($file, "127.0.0.1	".$domain.nl);
-fclose($file);
+add_host($domain);
 
 //enable new site
 exec("a2ensite ".$domain);
@@ -168,6 +177,14 @@ echo "The developpement environement for ".$domain. "is successfully created!".n
 // end the script with carriage return
 echo nl;
 
+
+function add_host($hostname, $ip="127.0.0.1") {
+	$file = fopen("/etc/hosts", "a");
+	fwrite($file, nl."# Line added by DevEn".nl);
+	fwrite($file, $ip."	".$hostname.nl);
+	fclose($file);
+	echo nl."Domain ".$hostname." with the ip ".$ip." added to the hosts file.".nl;
+}
 
 function prompt($prompt, $required, $default = "") {
 	echo $prompt.(empty($default)?(empty($required)?"":" (required)"):" [".$default."]").": ";
