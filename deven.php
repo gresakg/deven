@@ -109,7 +109,9 @@ if(strpos($domain,".") === false) {
 
 
 if(empty($path)) {
-	$path = "/home/".$user."/".$projects_dir."/".$domain;
+	$projects_dir = "/home/".$user."/".$projects_dir;
+	if(is_dir($projects_dir)===false) die($projects_dir . " does not exist. Check your config.php file.".nl.nl);
+	$path = $projects_dir."/".$domain;
 }
 
 $logpath = $path."/logs";
