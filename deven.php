@@ -95,6 +95,12 @@ else {
 	elseif(isset($options['p'])) {
 		$path = $options['p'];
 	}
+	if(isset($option['ip']) && !empty($options['ip'])) {
+		$ip = $optiond['ip'];
+	}
+	else {
+		$ip = "127.0.0.1";
+	}
 }
 
 //check if domain exists
@@ -104,9 +110,8 @@ if(in_array($apache_config_dir.$domain.".conf",$sites_available)) {
 }
 
 // host only option
-if(isset($options['host-only'])) {
-	if(empty($options['ip'])) $options['ip'] = "127.0.0.1"; 
-	add_host($domain, $options["ip"]);
+if(isset($options['host-only'])) { 
+	add_host($domain, $ip);
 	die;
 }
 
@@ -160,7 +165,7 @@ fwrite($file, $content);
 fclose($file);
 
 //add entry to /etc/hosts
-add_host($domain);
+add_host($domain,$ip);
 
 //enable new site
 exec("a2ensite ".$domain);
