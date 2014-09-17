@@ -20,7 +20,7 @@
  */
 
 define("nl","\n");
-define("version", "0.4");
+define("version", "0.41");
 
 require 'config.php';
 
@@ -155,6 +155,7 @@ chgrp($server_root,$group);
 $file = fopen($server_root."/index.php","w");
 fwrite($file, "<?php phpinfo(); ?>");
 fclose($file);
+chown($server_root."/index.php",$user);
 
 //write apache config file
 $file = fopen($apache_config_dir.$domain.".conf","w");
