@@ -20,7 +20,7 @@
  */
 
 define("nl","\n");
-define("version", "0.42");
+define("version", "0.43");
 
 require 'config.php';
 

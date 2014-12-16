@@ -31,11 +31,15 @@ foreach ($hosts as $line) {
 	
 	// preveri če ip obstaja, da ne prepiše
 	if(is_ipv4($ip)) {
-		$entry['ipv4'][$ip] = $line;
+		foreach($line as $l) {
+			$entry['ipv4'][$ip][] = $l;
+		}
 		continue;
 	}
 	if(is_ipv6($ip)) {
-		$entry['ipv6'][$ip] = $line;
+		foreach($line as $l) {
+			$entry['ipv6'][$ip][] = $l;
+		}
 		continue;
 	}
 	
