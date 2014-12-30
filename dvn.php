@@ -9,8 +9,28 @@ define("version", "0.50");
 
 require_once __DIR__.'/vendor/autoload.php';
 
+class Deven extends ConsoleKit\Command {
+	
+	private $splash; 
+	
+	 public function __construct(\ConsoleKit\Console $console)
+	 {
+		 parent::__construct($console);
+		 $this->setSplash(version);
+		 $this->writeln($this->splash);
+	 }
+	 
+	 public function setSplash($version) {
+		 $this->splash = "## DevEn version ".$version." ## \n".
+			"Copyright (C) 2014, Gregor Grešak, gresak.net \n".
+			"DevEn comes with ABSOLUTELY NO WARRANTY; This is free software, \n".
+			"and you are welcome to redistribute it under GPL v.2 license.";
+	 }
+	
+}
 
-class CreateCommand extends ConsoleKit\Command
+
+class CreateCommand extends Deven
 {
     public function execute(array $args, array $options = array())
     {
@@ -22,15 +42,7 @@ class CreateCommand extends ConsoleKit\Command
     }
 }
 
-class VersionCommand extends ConsoleKit\Command {
-	public function execute(array $args, array $options = array())
-    {
-        $this->writeln("DevEn version ".version, ConsoleKit\Colors::GREEN);
-    }
-}
-
-class HelpCommand extends ConsoleKit\Command {
-	
+class VersionCommand extends Deven {
 	public function execute(array $args, array $options = array())
     {
         $this->writeln("DevEn version ".version, ConsoleKit\Colors::GREEN);
@@ -40,7 +52,6 @@ class HelpCommand extends ConsoleKit\Command {
 $console = new ConsoleKit\Console();
 $console->addCommand('CreateCommand');
 $console->addCommand('VersionCommand');
-$console->addCommand('HelpCommand');
 $console->run();
 
 function is_root() {
