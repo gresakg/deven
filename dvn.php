@@ -13,6 +13,8 @@ class Deven extends ConsoleKit\Command {
 	
 	private $splash; 
 	
+	protected $config;
+	
 	 public function __construct(\ConsoleKit\Console $console)
 	 {
 		 parent::__construct($console);
@@ -25,6 +27,10 @@ class Deven extends ConsoleKit\Command {
 			"Copyright (C) 2014, Gregor Grešak, gresak.net \n".
 			"DevEn comes with ABSOLUTELY NO WARRANTY; This is free software, \n".
 			"and you are welcome to redistribute it under GPL v.2 license.";
+	 }
+	 
+	 public function setConfig() {
+		 $this->config = include 'config.php';
 	 }
 	
 }
