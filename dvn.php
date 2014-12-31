@@ -19,6 +19,7 @@ class Deven extends ConsoleKit\Command {
 	 {
 		 parent::__construct($console);
 		 $this->setSplash(version);
+		 $this->setConfig();
 		 $this->writeln($this->splash);
 	 }
 	 
@@ -41,11 +42,19 @@ class CreateCommand extends Deven
     public function execute(array $args, array $options = array())
     {
         if(!is_root()) {
-			$this->writeln('You need root privileges to run this script! Please run as sudo or root.', ConsoleKit\Colors::RED);
+			$this->writeln('You need root privileges to run this command! Please run as sudo or root.', ConsoleKit\Colors::RED);
 		return;
 		}
 		$this->writeln("Hello!");
     }
+}
+
+class ListCommand extends Deven {
+	 
+	public function execute(array $args, array $options = array()) {
+		var_dump(glob($this->config['apache_config_dir']."*.conf"));
+		
+	}
 }
 
 class VersionCommand extends Deven {
@@ -58,6 +67,7 @@ class VersionCommand extends Deven {
 $console = new ConsoleKit\Console();
 $console->addCommand('CreateCommand');
 $console->addCommand('VersionCommand');
+$console->addCommand('ListCommand');
 $console->run();
 
 function is_root() {
