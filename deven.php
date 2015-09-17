@@ -23,7 +23,7 @@ define("nl","\n");
 define("version", "0.44");
 
 require dirname(__FILE__).'/config.php';
-if(!defined("DEVEN_CONF_LOADED")) die("Check config file ".dirname(__FILE__).nl);
+if(empty($apache_config_dir)) die("Check config file ".dirname(__FILE__).nl);
 
 // few environement checks
 if(PHP_SAPI !== "cli") {
