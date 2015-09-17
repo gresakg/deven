@@ -20,9 +20,10 @@
  */
 
 define("nl","\n");
-define("version", "0.43");
+define("version", "0.44");
 
-require 'config.php';
+require dirname(__FILE__).'/config.php';
+if(!defined("DEVEN_CONF_LOADED")) die("Check config file ".dirname(__FILE__).nl);
 
 // few environement checks
 if(PHP_SAPI !== "cli") {
